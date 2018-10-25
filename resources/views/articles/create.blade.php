@@ -6,19 +6,25 @@
 
 {{-- application.blade.phpの@yield('content')に以下のレイアウトを代入 --}}
 @section('content')
-  <form action="/articles" method="post">
-    {{-- 以下を入れないとエラーになる --}}
-    {{ csrf_field() }}
-    <div>
-      <label for="title">タイトル</label>
-      <input type="text" name="title" placeholder="記事のタイトルを入れる">
-    </div>
-    <div>
-      <label for="body">内容</label>
-      <textarea name="body" rows="8" cols="80" placeholder="記事の内容を入れる"></textarea>
-    </div>
-    <div>
-      <input type="submit" value="送信">
-    </div>
-  </form>
+<div>
+ {!!Form::open(['url' => 'articles'])!!}
+ {!!Form::label('title', 'タイトル')!!}
+ {!!Form::text('title',null,['placeholder' => '記事のタイトルを入れる','class' => $errors->has('title') ? 'form-control is-invalid' : 'form-control'])!!}
+@if ($errors->has('title'))
+    <span class="invalid-feedback" role="alert">
+        {{ $errors->first('title') }}
+    </span>
+@endif
+</div>
+<div>
+ {!!Form::label('body', '内容')!!}
+ {!!Form::textarea('body',null,['placeholder' => '記事の内容を入れる','class' =>'form-control'])!!}
+ @if ($errors->has('body'))
+    <span class="invalid-feedback" role="alert">
+        {{ $errors->first('body') }}
+    </span>
+@endif
+</div>
+ {!!Form::submit('送信', ['class' => 'btn btn-primary'])!!}
+ {!!Form::close()!!}
 @endsection
