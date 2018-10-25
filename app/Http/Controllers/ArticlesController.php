@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Article;
+use App\Http\Requests\StorePostRequests;
 
 class ArticlesController extends Controller
 {
@@ -32,10 +33,10 @@ class ArticlesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request\StorePostRequests  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequests $request)
     {
         $article = new Article;
         // $requestにformからのデータが格納されているので、以下のようにそれぞれ代入する
@@ -76,11 +77,11 @@ class ArticlesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request\StorePostRequests  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorePostRequests $request, $id)
     {
         // idを元にレコードを検索して$articleに代入
         $article = Article::find($id);
