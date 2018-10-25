@@ -22,4 +22,5 @@
     {{-- <a href="/articles/{{$article->id}}">削除する</a> --}}
     <hr>
   @endforeach
+  {{ $articles->links() }}
 @endsection
